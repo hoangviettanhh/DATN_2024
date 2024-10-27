@@ -1,0 +1,52 @@
+/* CSS căn chỉnh form */
+.form-container {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    max-width: 1200px; /* Đặt chiều rộng tối đa của form */
+    width: 100%;
+    margin: 0 auto; /* Căn giữa theo chiều ngang */
+    position: relative;
+    top: 50%; /* Căn giữa theo chiều dọc */
+    transform: translateY(-50%);
+}
+
+/* Body */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f7f7f7;
+    height: 100vh; /* Đặt chiều cao toàn trang */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+}
+
+/* Style cho các trường input và button */
+input[type="text"],
+input[type="file"],
+textarea,
+select {
+    width: 100%;
+    padding: 12px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    font-size: 16px;
+    margin-bottom: 15px;
+}
+
+button {
+    width: 100%;
+    padding: 15px;
+    border-radius: 5px;
+    background-color: #4CAF50;
+    color: white;
+    font-size: 18px;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049;
+}
