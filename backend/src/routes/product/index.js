@@ -10,6 +10,8 @@ router.get('/products', productController.getAllProducts);
 // Lấy sản phẩm theo ID
 router.get('/products/:id', productController.getProductById);
 
+router.get('/products-hehe', productController.getProductsByCategoryAndPriceRange);
+
 // Thêm sản phẩm mới
 router.post('/products', productController.createProduct);
 
