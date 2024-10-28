@@ -4,59 +4,27 @@
     <div class="auto-container">
       <div class="row clearfix">
         <div class="column col-lg-12 col-md-12 col-sm-12">
-          <h2>Login</h2>
+          <h2 class="text-center">Login</h2>
 
           <!-- Login Form -->
           <div class="login-form">
-            <!--Login Form-->
-            <form (submit)="handleSubmit($event)">
+            <form [formGroup]="loginForm" (ngSubmit)="handleSubmit()">
               <div class="form-group">
-                <label for="username">Username or Email Address</label>
-                <input
-                  type="text"
-                  id="username"
-                  name="email"
-                  placeholder="Name or Email"
-                  required
-                />
+                <label for="username">Email:</label>
+                <input type="email" id="username" formControlName="username" required class="form-control">
+                <small *ngIf="loginForm.get('username')?.invalid && loginForm.get('username')?.touched" class="error-message">
+                  Email là bắt buộc và phải hợp lệ.
+                </small>
               </div>
               <div class="form-group">
-                <label for="password">Enter Your Password</label>
-                <input
-                  type="password"
-                  id="password"
-                  name="password"
-                  placeholder="Password"
-                  required
-                />
+                <label for="password">Password:</label>
+                <input type="password" id="password" formControlName="password" required class="form-control">
+                <small *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched" class="error-message">
+                  Mật khẩu là bắt buộc.
+                </small>
               </div>
-
-              <div class="clearfix">
-                <div class="pull-left">
-                  <div class="form-group check-box">
-                    <input
-                      type="checkbox"
-                      name="shipping-option"
-                      id="account-option-1"
-                    />
-                    <label for="account-option-1">Remember me</label>
-                  </div>
-                </div>
-                <div class="pull-right">
-                  <div class="form-group no-margin">
-                    <button
-                      class="theme-btn btn-style-one"
-                      type="submit"
-                      name="submit-form"
-                    >
-                      LOGIN
-                    </button>
-                  </div>
-                </div>
-              </div>
-              <div class="form-group">
-                <a href="#" class="psw">Lost your password?</a>
-              </div>
+              <div class="error-message" *ngIf="errorMessage">{{ errorMessage }}</div>
+              <button type="submit" class="btn btn-primary" [disabled]="loginForm.invalid">Login</button>
             </form>
           </div>
           <!--End Login Form -->
@@ -66,3 +34,36 @@
   </section>
   <!--End Login Section-->
 </div>
+
+<style>
+  .login-form {
+    background-color: #f8f9fa; /* Nền cho form */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .form-group {
+    margin-bottom: 15px; /* Khoảng cách giữa các trường nhập */
+  }
+
+  .form-control {
+    width: 100%; /* Chiếm toàn bộ chiều rộng */
+    padding: 10px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+  }
+
+  .error-message {
+    color: red;
+    font-size: 0.875em; /* Kích thước chữ nhỏ hơn */
+    margin-top: 5px; /* Khoảng cách trên thông điệp lỗi */
+  }
+
+  .btn {
+    padding: 10px 15px; /* Padding cho nút */
+    font-size: 16px; /* Kích thước chữ cho nút */
+    cursor: pointer; /* Đổi con trỏ khi hover */
+  }
+
+</style>
