@@ -4,7 +4,7 @@
     <div class="auto-container">
       <div class="row clearfix">
         <div class="column col-lg-12 col-md-12 col-sm-12">
-          <h2 class="text-center">Login</h2>
+          <h2 class="text-center">Đăng Nhập</h2>
 
           <!-- Login Form -->
           <div class="login-form">
@@ -17,14 +17,15 @@
                 </small>
               </div>
               <div class="form-group">
-                <label for="password">Password:</label>
+                <label for="password">Mật Khẩu:</label>
                 <input type="password" id="password" formControlName="password" required class="form-control">
                 <small *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched" class="error-message">
                   Mật khẩu là bắt buộc.
                 </small>
               </div>
               <div class="error-message" *ngIf="errorMessage">{{ errorMessage }}</div>
-              <button type="submit" class="btn btn-primary" [disabled]="loginForm.invalid">Login</button>
+              <button type="submit" class="btn btn-primary" [disabled]="loginForm.invalid">Đăng Nhập</button>
+              <button type="button" class="btn btn-secondary" (click)="showSignupPopup()">Đăng Ký</button>
             </form>
           </div>
           <!--End Login Form -->
@@ -32,23 +33,49 @@
       </div>
     </div>
   </section>
+  <!-- Popup Đăng Ký -->
+<div class="signup-popup" *ngIf="isSignupVisible">
+  <div class="popup-content">
+    <h2>Đăng Ký</h2>
+    <form [formGroup]="signupForm" (ngSubmit)="handleSignup()">
+      <div class="form-group">
+        <label for="signup-email">Email:</label>
+        <input type="email" id="signup-email" formControlName="email" required class="form-control">
+        <small *ngIf="signupForm.get('email')?.invalid && signupForm.get('email')?.touched" class="error-message">
+          Email là bắt buộc và phải hợp lệ.
+        </small>
+      </div>
+      <div class="form-group">
+        <label for="signup-password">Mật Khẩu:</label>
+        <input type="password" id="signup-password" formControlName="password" required class="form-control">
+        <small *ngIf="signupForm.get('password')?.invalid && signupForm.get('password')?.touched" class="error-message">
+          Mật khẩu là bắt buộc.
+        </small>
+      </div>
+      <div class="error-message" *ngIf="signupErrorMessage">{{ signupErrorMessage }}</div>
+      <button type="submit" class="btn btn-primary" [disabled]="signupForm.invalid">Đăng Ký</button>
+      <button type="button" class="btn btn-secondary btnSignup" (click)="closeSignupPopup()">Đóng</button>
+    </form>
+  </div>
+</div>
+
   <!--End Login Section-->
 </div>
 
 <style>
   .login-form {
-    background-color: #f8f9fa; /* Nền cho form */
+    background-color: #f8f9fa;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   }
 
   .form-group {
-    margin-bottom: 15px; /* Khoảng cách giữa các trường nhập */
+    margin-bottom: 15px;
   }
 
   .form-control {
-    width: 100%; /* Chiếm toàn bộ chiều rộng */
+    width: 100%;
     padding: 10px;
     border: 1px solid #ced4da;
     border-radius: 4px;
@@ -56,14 +83,36 @@
 
   .error-message {
     color: red;
-    font-size: 0.875em; /* Kích thước chữ nhỏ hơn */
-    margin-top: 5px; /* Khoảng cách trên thông điệp lỗi */
+    font-size: 0.875em;
+    margin-top: 5px;
   }
 
   .btn {
-    padding: 10px 15px; /* Padding cho nút */
-    font-size: 16px; /* Kích thước chữ cho nút */
-    cursor: pointer; /* Đổi con trỏ khi hover */
+    padding: 10px 15px;
+    font-size: 16px;
+    cursor: pointer;
   }
+  .signup-popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.popup-content {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  width: 400px;
+}
+.btnSignup{
+  margin-left: 10px;
+}
 
 </style>

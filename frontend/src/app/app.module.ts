@@ -5,10 +5,10 @@ import { AppComponent } from './app.component';
 import { RouterModule } from '@angular/router';
 import { AdminModule } from './admin/admin.module'; 
 import { ClientModule } from './client/client.module'; 
-import { HttpClientModule } from '@angular/common/http'; 
-import { AuthService } from './auth/auth.service'; // Từ AppModule
-import { FormsModule } from '@angular/forms'; // Thêm dòng này
-import { CommonModule } from '@angular/common'; // Thêm dòng này
+import { provideHttpClient, withFetch } from '@angular/common/http'; //thêm withFetch
+import { FormsModule } from '@angular/forms'; //FormsModule được import
+import { CommonModule } from '@angular/common'; // CommonModule được import
+import { AuthService } from './auth/auth.service';
 
 @NgModule({
   declarations: [
@@ -20,11 +20,11 @@ import { CommonModule } from '@angular/common'; // Thêm dòng này
     RouterModule,
     AdminModule, 
     ClientModule, 
-    HttpClientModule, 
+    CommonModule,
+    FormsModule, 
+    provideHttpClient(withFetch()), // sử dụng withFetch cho SSR
   ],
-  
   providers: [AuthService],
   bootstrap: [AppComponent],
-  
 })
 export class AppModule { }

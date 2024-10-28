@@ -17,6 +17,7 @@ import { ServicesComponent } from './services/services.component';
 import { ProjectsComponent } from './projects/projects.component';
 import { ServiceDetailComponent } from './service-detail/service-detail.component';
 import { RegisterComponent } from './register/register.component';
+import { UserComponent } from './user/user.component';
 
 
 const clientRoutes: Routes = [
@@ -35,6 +36,7 @@ const clientRoutes: Routes = [
       { path: 'login', component: LoginComponent },
       { path: 'projects', component: ProjectsComponent },
       { path: 'register', component: RegisterComponent },
+      { path: 'user', component: UserComponent },
       { path: '**', component: PagenotfoundComponent },
     ]},
   ];

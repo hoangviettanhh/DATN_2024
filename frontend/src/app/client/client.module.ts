@@ -6,7 +6,7 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthService } from '../auth/auth.service';
-import { FormsModule } from '@angular/forms'; // Thêm FormsModule
+import { FormsModule } from '@angular/forms'; // Đảm bảo FormsModule được import
 import { LoginComponent } from './login/login.component'; // Import LoginComponent
 
 @NgModule({
@@ -15,14 +15,12 @@ import { LoginComponent } from './login/login.component'; // Import LoginCompone
     ClientRoutingModule,
     RouterModule,
     HttpClientModule,
-    HeaderComponent,  // Đưa HeaderComponent vào declarations
-    FooterComponent,
-    LoginComponent,
     FormsModule,
+    HeaderComponent,
+    FooterComponent,
+    LoginComponent, 
   ],
-  declarations: [
-
-  ],
+  declarations: [],
   providers: [AuthService]
 })
 export class ClientModule { }
