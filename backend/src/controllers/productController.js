@@ -31,7 +31,7 @@ exports.getAllCategory = (req, res) => {
             return res.status(500).json({message: 'Error retrieving products', error: err});
         }
         res.json({
-            code: 200,
+            status: 200,
             message: "Categorys retrieved successfully",
             metadata: {
                 products: results
