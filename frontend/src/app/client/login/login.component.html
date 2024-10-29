@@ -39,6 +39,13 @@
     <h2>Đăng Ký</h2>
     <form [formGroup]="signupForm" (ngSubmit)="handleSignup()">
       <div class="form-group">
+        <label for="signup-name">Tên:</label>
+        <input type="text" id="signup-name" formControlName="name" required class="form-control">
+        <small *ngIf="signupForm.get('name')?.invalid && signupForm.get('name')?.touched" class="error-message">
+          Tên là bắt buộc.
+        </small>
+      </div>
+      <div class="form-group">
         <label for="signup-email">Email:</label>
         <input type="email" id="signup-email" formControlName="email" required class="form-control">
         <small *ngIf="signupForm.get('email')?.invalid && signupForm.get('email')?.touched" class="error-message">

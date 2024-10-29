@@ -30,6 +30,7 @@ export class LoginComponent {
 
     // Khởi tạo form đăng ký
     this.signupForm = this.fb.group({
+      name: ['', [Validators.required]], // Thêm trường name
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]],
     });
@@ -45,8 +46,8 @@ export class LoginComponent {
   onLogin(username: string, password: string) {
     this.authService.login(username, password).subscribe(
       (response) => {
-        if (response.token) {
-          localStorage.setItem('token', response.token);
+        if (response.metadata.tokens && response.metadata.tokens.accessToken) {
+          localStorage.setItem('token', response.metadata.tokens.accessToken);
           this.router.navigate(['/user']);
         } else {
           this.errorMessage = 'Không nhận được token từ server.';
@@ -57,6 +58,7 @@ export class LoginComponent {
       }
     );
   }
+
 
   showSignupPopup() {
     this.isSignupVisible = true; // Hiển thị popup
@@ -70,18 +72,26 @@ export class LoginComponent {
 
   handleSignup() {
     if (this.signupForm.valid) {
-      const { email, password } = this.signupForm.value;
-      this.authService.signup(email, password).subscribe(
+      const { name, email, password } = this.signupForm.value;
+      this.authService.signup(name, email, password).subscribe(
         (response) => {
-          console.log('Đăng ký thành công:', response);
-          // Xử lý token nếu cần
-          localStorage.setItem('token', response.metadata.tokens.accessToken);
-          this.router.navigate(['/cart']); // Điều hướng sau khi đăng ký thành công
-          this.closeSignupPopup(); // Đóng popup
+          if (response.metadata?.tokens?.accessToken) {
+            // Lưu thông tin token và user vào localStorage
+            localStorage.setItem('accessToken', response.metadata.tokens.accessToken);
+            localStorage.setItem('refreshToken', response.metadata.tokens.refreshToken);
+            localStorage.setItem('userId', response.metadata.user.user_id);
+            localStorage.setItem('userName', response.metadata.user.name);
+            localStorage.setItem('userEmail', response.metadata.user.email);
+
+            this.router.navigate(['/login']);
+            this.closeSignupPopup();
+          } else {
+            this.signupErrorMessage = 'Đăng ký thành công nhưng không nhận được token.';
+          }
         },
         (error) => {
           console.error('Lỗi đăng ký:', error);
-          this.signupErrorMessage = 'Đăng ký không thành công. Vui lòng thử lại.'; // Thông báo lỗi
+          this.signupErrorMessage = 'Đăng ký không thành công. Vui lòng thử lại.';
         }
       );
     }

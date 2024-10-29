@@ -84,8 +84,8 @@ class AccessService {
         // console.log("signUp:: name %s :: email %s :: password %s", name, email, password)
         const holderShop = await User.findUserByEmail(email);
         console.log('holderShop::', holderShop)
-        if (holderShop) {
-            throw new BadRequestError('Error Shop already registered!')
+        if(name === holderShop.fullname){
+            throw new BadRequestError('Error Shop already registered!11')
         }
         const passwordHash = await bcrypt.hash(password, 10)
 
@@ -121,14 +121,12 @@ class AccessService {
             console.log(`Created Tokens Success::`, tokens)
             return {
                 code: 201,
-                metadata: {
                     user: {
                         "user_id": newShop,
                         "name": name,
                         "email": email
                     },
                     tokens
-                }
             }
         }
 
