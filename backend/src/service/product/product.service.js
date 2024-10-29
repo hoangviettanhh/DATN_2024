@@ -1,6 +1,6 @@
 'use strict'
 
-const {BadRequestError, AuthFailureError, ForbiddenError} = require("../core/error.response");
+const {BadRequestError, AuthFailureError, ForbiddenError} = require("../../core/error.response");
 
 
 const Product = require("../../models/product")

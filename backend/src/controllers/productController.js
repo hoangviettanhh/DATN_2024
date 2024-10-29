@@ -13,6 +13,33 @@ exports.getAllProducts = (req, res) => {
     });
 };
 
+exports.getAllCategory = (req, res) => {
+    const query = `
+        SELECT id,
+               category_name     AS categoryName,
+               images,
+               parent_categoryID AS parentCategoryID,
+               status,
+               description,
+               created_at        AS createdAt,
+               updated_at        AS updatedAt
+        FROM categories
+        WHERE status = 'active'
+    `;
+    db.query(query, (err, results) => {
+        if (err) {
+            return res.status(500).json({message: 'Error retrieving products', error: err});
+        }
+        res.json({
+            code: 200,
+            message: "Categorys retrieved successfully",
+            metadata: {
+                products: results
+            }
+        });
+    });
+};
+
 exports.getProductById = (req, res) => {
     const {id} = req.params;
     const sql = 'SELECT * FROM products WHERE ProductID = ?';

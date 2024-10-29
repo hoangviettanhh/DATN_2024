@@ -7,6 +7,7 @@ const  {authentication}= require("../../auth/auth.Utils");
 // Lấy danh sách sản phẩm
 router.get('/products', productController.getAllProducts);
 
+router.get('/categorys', productController.getAllCategory);
 // Lấy sản phẩm theo ID
 router.get('/products/:id', productController.getProductById);
 
@@ -20,5 +21,7 @@ router.put('/products/:id', productController.updateProduct);
 
 // Xóa sản phẩm
 router.delete('/products/:id', productController.deleteProduct);
+
+
 
 module.exports = router;
