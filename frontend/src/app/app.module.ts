@@ -9,6 +9,7 @@ import { provideHttpClient, withFetch } from '@angular/common/http'; //thêm wit
 import { FormsModule } from '@angular/forms'; //FormsModule được import
 import { CommonModule } from '@angular/common'; // CommonModule được import
 import { AuthService } from './auth/auth.service';
+import { HomeService } from './client/home/home.service';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,7 @@ import { AuthService } from './auth/auth.service';
     FormsModule, 
     provideHttpClient(withFetch()), // sử dụng withFetch cho SSR
   ],
-  providers: [AuthService],
+  providers: [AuthService, HomeService],
   bootstrap: [AppComponent],
 })
 export class AppModule { }

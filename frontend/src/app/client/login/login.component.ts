@@ -16,11 +16,18 @@ import { CommonModule } from '@angular/common'; // Thêm CommonModule
 })
 export class LoginComponent {
   loginForm: FormGroup;
-  signupForm: FormGroup; // Khai báo FormGroup cho form đăng ký
-  errorMessage: string = '';
-  signupErrorMessage: string = ''; // Thông báo lỗi đăng ký
-  isSignupVisible: boolean = false; // hiển thị popup đăng ký
+  signupForm: FormGroup;
 
+  errorMessage: string = '';
+
+  signupErrorMessage: string = '';
+  isSignupVisible: boolean = false; 
+  successMessage: string = '';
+
+  isPopupVisible: boolean = false; 
+  popupMessage: string = ''; 
+  isSuccess: boolean = true; 
+  
   constructor(private authService: AuthService, private router: Router, private fb: FormBuilder) {
     // Khởi tạo form đăng nhập
     this.loginForm = this.fb.group({
@@ -49,25 +56,36 @@ export class LoginComponent {
         if (response.metadata.tokens && response.metadata.tokens.accessToken) {
           localStorage.setItem('token', response.metadata.tokens.accessToken);
           this.router.navigate(['/user']);
+          this.showPopup('Đăng nhập thành công!', true);
         } else {
-          this.errorMessage = 'Không nhận được token từ server.';
+          this.showPopup('Không nhận được token từ server.', false);
         }
       },
       (error) => {
-        this.errorMessage = 'Tên đăng nhập hoặc mật khẩu không đúng.';
+        this.showPopup('Đăng nhập không thành công !', false); 
       }
     );
   }
 
-
   showSignupPopup() {
-    this.isSignupVisible = true; // Hiển thị popup
+    this.isSignupVisible = true;
   }
 
   closeSignupPopup() {
-    this.isSignupVisible = false; // Ẩn popup
-    this.signupForm.reset(); // Reset form đăng ký
-    this.signupErrorMessage = ''; // Xóa thông báo lỗi
+    this.isSignupVisible = false; 
+    this.signupForm.reset(); 
+    this.signupErrorMessage = ''; 
+  }
+
+  showPopup(message: string, isSuccess: boolean) {
+    this.popupMessage = message;
+    this.isSuccess = isSuccess;
+    this.isPopupVisible = true;
+    setTimeout(() => this.closePopup(), 3000); 
+  }
+
+  closePopup() {
+    this.isPopupVisible = false;
   }
 
   handleSignup() {
@@ -83,15 +101,16 @@ export class LoginComponent {
             localStorage.setItem('userName', response.metadata.user.name);
             localStorage.setItem('userEmail', response.metadata.user.email);
 
-            this.router.navigate(['/login']);
             this.closeSignupPopup();
+            this.showPopup('Đăng ký thành công', true);
+            this.router.navigate(['/login']);
           } else {
-            this.signupErrorMessage = 'Đăng ký thành công nhưng không nhận được token.';
+            this.signupErrorMessage = 'Đăng ký không thành công. Vui lòng thử lại.';
           }
         },
         (error) => {
           console.error('Lỗi đăng ký:', error);
-          this.signupErrorMessage = 'Đăng ký không thành công. Vui lòng thử lại.';
+          this.showPopup('Đăng ký không thành công. Vui lòng thử lại.', false);
         }
       );
     }

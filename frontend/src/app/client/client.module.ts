@@ -6,6 +6,7 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthService } from '../auth/auth.service';
+import { HomeService } from './home/home.service';
 import { FormsModule } from '@angular/forms'; // Đảm bảo FormsModule được import
 import { LoginComponent } from './login/login.component'; // Import LoginComponent
 
@@ -21,6 +22,6 @@ import { LoginComponent } from './login/login.component'; // Import LoginCompone
     LoginComponent, 
   ],
   declarations: [],
-  providers: [AuthService]
+  providers: [AuthService, HomeService]
 })
 export class ClientModule { }

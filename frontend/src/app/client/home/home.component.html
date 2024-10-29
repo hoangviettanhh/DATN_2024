@@ -41,12 +41,12 @@
         <div class="row clearfix">
 
             <!--Content Side-->
-            <div class="content-side col-xl-12 col-lg-8 col-md-12 p-5">
+             <!-- <div class="content-side col-xl-12 col-lg-8 col-md-12 p-5">
+
                 <h3 class="text-center mb-2 text-uppercase">Sản Phẩm Mới</h3>
                 <div class="our-shop">
                     <div class="row clearfix">
 
-                        <!--Shop Item-->
                         <div class="shop-item col-xl-3 col-lg-6 col-md-6 col-sm-12">
                             <div class="inner-box">
                                 <div class="image">
@@ -61,7 +61,32 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
+
+            <div class="content-side col-xl-12 col-lg-8 col-md-12 p-5">
+                <h3 class="text-center mb-2 text-uppercase">Sản Phẩm Mới</h3>
+                <div class="our-shop">
+                  <div class="row clearfix">
+                    <!-- Lặp qua danh sách sản phẩm -->
+                    <div class="shop-item col-xl-3 col-lg-6 col-md-6 col-sm-12" *ngFor="let product of products">
+                      <div class="inner-box">
+                        <div class="image">
+                          <img [src]="product.imageUrl" alt="{{ product.name }}" /> <!-- Giả sử sản phẩm có thuộc tính imageUrl -->
+                          <div class="overlay-box">
+                            <ul class="cart-option">
+                              <li><a [routerLink]="['/shop-single', product.id]"><span class="fa fa-link"></span></a></li> <!-- Giả sử có route cho chi tiết sản phẩm -->
+                            </ul>
+                          </div>
+                        </div>
+                        <div class="text-center">
+                          <h5>{{ product.name }}</h5> <!-- Giả sử sản phẩm có thuộc tính name -->
+                          <p>{{ product.price | currency }}</p> <!-- Giả sử sản phẩm có thuộc tính price -->
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
         </div>
     </div>
 
