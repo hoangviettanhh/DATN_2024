@@ -32,21 +32,16 @@ authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIxLCJlbWFpbCI6
 
 POST localhost:3000/api/handler-refresh-token HTTP/1.1
 Host: localhost:3000
-x-rtoken-id: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIxLCJlbWFpbCI6Im5ndXllbmhvYW5naGFpQGdtYWlsLmNvbSIsInVzZXJSb2xlIjoidXNlciIsImlhdCI6MTcyOTY5MDM0NywiZXhwIjoxNzMwMjk1MTQ3fQ.Gq8jga-9hvdsS6P-wzSulHqDT3mGE4OcmY99N3HriPg
-x-client-id: 21
+x-rtoken-id: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjI2LCJlbWFpbCI6Im5ndXllbmhvYW5naGFpQGdtYWlsLmNvbSIsInVzZXJSb2xlIjoidXNlciIsImlhdCI6MTczMDIxMTg3NywiZXhwIjoxNzMwODE2Njc3fQ.7TA3m5omU9a-C3fv1gusMH2TZzRRAF79rR0keEwHvyQ
+x-client-id: 26
 Content-Type: application/json
 
 
 ###GetProducts
-GET  http://localhost:3000/api/products-hehe HTTP/1.1
+GET  http://localhost:3000/api/products-hehe?minPrice=10&maxPrice=100 HTTP/1.1
 Host: localhost:3000
 Content-Type: application/json
 
-{
-  "categoryId": 1,
-  "minPrice": 10,
-  "maxPrice": 300
-}
 
 
 ###GetCategorys

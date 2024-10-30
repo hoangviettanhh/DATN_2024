@@ -60,7 +60,7 @@ exports.getProductById = (req, res) => {
 
 
 exports.getProductsByCategoryAndPriceRange = (req, res) => {
-    const {categoryId, minPrice, maxPrice} = req.body;
+    const {categoryId, minPrice, maxPrice} = req.query;
 
 
     const query = `

@@ -9,7 +9,7 @@ COPY package*.json ./
 
 # Cài đặt các dependencies
 RUN npm install
-
+COPY .env .env
 # Sao chép toàn bộ mã nguồn vào container
 COPY . .
 
