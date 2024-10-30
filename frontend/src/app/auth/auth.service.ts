@@ -12,10 +12,14 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
+  private isLocalStorageAvailable(): boolean {
+    return typeof localStorage !== 'undefined';
+  }
+
   login(email: string, password: string): Observable<any> {
     return this.http.post(`${this.apiUrl}/login`, { email, password }).pipe(
       tap((response: any) => {
-        if (response.status === 200) {
+        if (response.status === 200 && this.isLocalStorageAvailable()) {
           // Lưu access token và refresh token vào localStorage
           localStorage.setItem('accessToken', response.metadata.tokens.accessToken);
           localStorage.setItem('refreshToken', response.metadata.tokens.refreshToken);
@@ -31,11 +35,10 @@ export class AuthService {
     );
   }
 
-
   signup(name: string, email: string, password: string): Observable<any> {
-    return this.http.post(`${this.apiUrl}/signup`, {name, email, password }).pipe(
+    return this.http.post(`${this.apiUrl}/signup`, { name, email, password }).pipe(
       tap((response: any) => {
-        if (response.status === 201) {
+        if (response.status === 201 && this.isLocalStorageAvailable()) {
           // Lưu access token và refresh token vào localStorage
           localStorage.setItem('accessToken', response.metadata.tokens.accessToken);
           localStorage.setItem('refreshToken', response.metadata.tokens.refreshToken);
@@ -45,19 +48,19 @@ export class AuthService {
         }
       }),
       catchError((error: any) => {
-        // Xử lý lỗi từ API
-        if (error.error) {
-          return throwError(() => new Error(error.error.message || 'Unknown error'));
-        } else {
-          return throwError(() => new Error('An error occurred'));
-        }
+        const errorMessage = error.error?.message || 'Đã xảy ra lỗi';
+        return throwError(() => new Error(errorMessage));
       })
     );
   }
 
   logout(): Observable<any> {
-    const clientId = localStorage.getItem('userId'); // Lấy userId từ localStorage
-    const accessToken = localStorage.getItem('accessToken'); // Lấy access token từ localStorage
+    if (!this.isLocalStorageAvailable()) {
+      throw new Error('localStorage không được hỗ trợ trong môi trường này.');
+    }
+
+    const clientId = localStorage.getItem('userId');
+    const accessToken = localStorage.getItem('accessToken');
 
     if (!clientId || !accessToken) {
       throw new Error('Không thể đăng xuất, không tìm thấy thông tin người dùng.');
@@ -85,7 +88,6 @@ export class AuthService {
 
 
   isAuthenticated(): boolean {
-    // Kiểm tra xem người dùng có đăng nhập hay không bằng  access token
-    return localStorage.getItem('accessToken') !== null;
+    return this.isLocalStorageAvailable() && localStorage.getItem('accessToken') !== null;
   }
 }

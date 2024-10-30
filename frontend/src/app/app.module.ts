@@ -2,12 +2,10 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { RouterModule } from '@angular/router';
-import { AdminModule } from './admin/admin.module'; 
-import { ClientModule } from './client/client.module'; 
-import { provideHttpClient, withFetch } from '@angular/common/http'; //thêm withFetch
-import { FormsModule } from '@angular/forms'; //FormsModule được import
-import { CommonModule } from '@angular/common'; // CommonModule được import
+import { AdminModule } from './admin/admin.module';
+import { ClientModule } from './client/client.module';
+import { provideHttpClient, withFetch } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 import { AuthService } from './auth/auth.service';
 import { HomeService } from './client/home/home.service';
 
@@ -18,12 +16,10 @@ import { HomeService } from './client/home/home.service';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    RouterModule,
-    AdminModule, 
-    ClientModule, 
-    CommonModule,
-    FormsModule, 
-    provideHttpClient(withFetch()), // sử dụng withFetch cho SSR
+    AdminModule,
+    ClientModule,
+    FormsModule,
+    provideHttpClient(withFetch()), // Cấu hình HTTP client
   ],
   providers: [AuthService, HomeService],
   bootstrap: [AppComponent],

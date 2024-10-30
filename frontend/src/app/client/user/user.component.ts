@@ -2,11 +2,11 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../auth/auth.service';
 import { RouterLink } from '@angular/router';
-import { CommonModule } from '@angular/common'; // Import CommonModule
+import { CommonModule } from '@angular/common';
 
 @Component({
-  standalone: true, //để đánh dấu component là standalone
-  imports: [RouterLink, CommonModule], // Thêm CommonModule vào imports
+  standalone: true,
+  imports: [RouterLink, CommonModule],
   selector: 'app-user',
   templateUrl: './user.component.html',
 })

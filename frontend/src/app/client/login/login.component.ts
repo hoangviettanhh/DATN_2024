@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../../auth/auth.service';
 import { Router } from '@angular/router';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms'; // Thêm import
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common'; // Thêm CommonModule
 
 @Component({
@@ -21,13 +21,13 @@ export class LoginComponent {
   errorMessage: string = '';
 
   signupErrorMessage: string = '';
-  isSignupVisible: boolean = false; 
+  isSignupVisible: boolean = false;
   successMessage: string = '';
 
-  isPopupVisible: boolean = false; 
-  popupMessage: string = ''; 
-  isSuccess: boolean = true; 
-  
+  isPopupVisible: boolean = false;
+  popupMessage: string = '';
+  isSuccess: boolean = true;
+
   constructor(private authService: AuthService, private router: Router, private fb: FormBuilder) {
     // Khởi tạo form đăng nhập
     this.loginForm = this.fb.group({
@@ -55,14 +55,14 @@ export class LoginComponent {
       (response) => {
         if (response.metadata.tokens && response.metadata.tokens.accessToken) {
           localStorage.setItem('token', response.metadata.tokens.accessToken);
-          this.router.navigate(['/user']);
           this.showPopup('Đăng nhập thành công!', true);
+          this.router.navigate(['/user']);
         } else {
           this.showPopup('Không nhận được token từ server.', false);
         }
       },
       (error) => {
-        this.showPopup('Đăng nhập không thành công !', false); 
+        this.showPopup('Đăng nhập không thành công ! Vui lòng thử lại', false);
       }
     );
   }
@@ -72,16 +72,16 @@ export class LoginComponent {
   }
 
   closeSignupPopup() {
-    this.isSignupVisible = false; 
-    this.signupForm.reset(); 
-    this.signupErrorMessage = ''; 
+    this.isSignupVisible = false;
+    this.signupForm.reset();
+    this.signupErrorMessage = '';
   }
 
   showPopup(message: string, isSuccess: boolean) {
     this.popupMessage = message;
     this.isSuccess = isSuccess;
     this.isPopupVisible = true;
-    setTimeout(() => this.closePopup(), 3000); 
+    setTimeout(() => this.closePopup(), 3000);
   }
 
   closePopup() {

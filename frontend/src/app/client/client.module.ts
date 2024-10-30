@@ -9,6 +9,7 @@ import { AuthService } from '../auth/auth.service';
 import { HomeService } from './home/home.service';
 import { FormsModule } from '@angular/forms'; // Đảm bảo FormsModule được import
 import { LoginComponent } from './login/login.component'; // Import LoginComponent
+import { HomeComponent } from './home/home.component'; // Import LoginComponent
 
 @NgModule({
   imports: [
@@ -19,7 +20,8 @@ import { LoginComponent } from './login/login.component'; // Import LoginCompone
     FormsModule,
     HeaderComponent,
     FooterComponent,
-    LoginComponent, 
+    LoginComponent,
+    HomeComponent,
   ],
   declarations: [],
   providers: [AuthService, HomeService]

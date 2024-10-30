@@ -3,32 +3,32 @@
 <div *ngIf="isPopupVisible" class="popup-success-alert" id="popupSuccessAlert" role="alert">
     <div class="popup-content">
       <div [ngClass]="isSuccess ? 'icon-success' : 'icon-error'">
-        <span>{{ isSuccess ? '&#10003;' : '&#10007;' }}</span> 
+        <span>{{ isSuccess ? '&#10003;' : '&#10007;' }}</span>
       </div>
       <p class="message">{{ popupMessage }}</p>
       <button type="button" class="btn-close" (click)="closePopup()">Đóng</button>
     </div>
   </div>
     <h2><i class="bi bi-person-circle"></i> Thông Tin Người Dùng</h2>
-    
+
     <div class="tabs">
         <button class="tab-link active" onclick="openTab(event, 'infoTab')">Thông Tin</button>
         <button class="tab-link" onclick="openTab(event, 'orderTab')">Đơn Hàng</button>
         <button class="tab-link" onclick="openTab(event, 'settingsTab')">Cài Đặt</button>
     </div>
-    
+
     <div id="infoTab" class="tab-content active">
         <div class="user-details">
             <p><strong>Tên người dùng:</strong> <span id="userName">Nguyễn Văn A</span></p>
             <p><strong>Email:</strong> <span id="userEmail">email.com</span></p>
         </div>
-        <button class="logout-btn">Đăng Xuất</button>
+        <button class="logout-btn" (click)="onLogout()">Đăng Xuất</button>
     </div>
-    
+
     <div id="orderTab" class="tab-content">
         <p>Chưa có đơn hàng nào.</p>
     </div>
-    
+
     <div id="settingsTab" class="tab-content">
         <p>Cài đặt tài khoản sẽ xuất hiện ở đây.</p>
     </div>
@@ -120,44 +120,81 @@
     margin-bottom: 15px;
     }
 
-.popup-success-alert {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  background-color: #f8f9fa;
-  border: 1px solid #28a745;
-  padding: 20px;
-  z-index: 1000;
-  animation: fadeIn 0.5s ease;
-}
+    /* Popup Success Alert */
+    .popup-success-alert {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.7);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      opacity: 0;
+      animation: fadeIn 0.5s forwards;
+    }
 
-.popup-content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
+    .popup-success-alert .popup-content {
+      background: #ffffff;
+      padding: 30px;
+      border-radius: 8px;
+      text-align: center;
+      max-width: 300px;
+      width: 100%;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    }
 
-.message {
-  margin: 0;
-}
+    .icon-success {
+      font-size: 3em;
+      color: #28a745;
+      margin-bottom: 15px;
+    }
 
-.btn-close {
-  margin-top: 10px;
-  background: none;
-  border: none;
-  color: #007bff;
-  cursor: pointer;
-}
+    .icon-success span {
+      font-weight: bold;
+    }
 
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
+    .message {
+      font-size: 1.1em;
+      color: #333;
+      margin-bottom: 20px;
+    }
 
-@keyframes fadeOut {
-  from { opacity: 1; }
-  to { opacity: 0; }
-}
+    .btn-close {
+      background: #28a745;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 1em;
+    }
+
+    .btn-close:hover {
+      background: #218838;
+    }
+
+    /* Fade In Animation */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    /* Fade Out Animation */
+    @keyframes fadeOut {
+      from {
+        opacity: 1;
+      }
+      to {
+        opacity: 0;
+      }
+    }
 
 </style>
 
