@@ -3,7 +3,7 @@ const router = express.Router();
 const productController = require('../../controllers/productController');
 const asyncHandler = require("../../helpers/asyncHandler");
 const accessController = require("../../controllers/authController");
-const  {authentication}= require("../../auth/auth.Utils");
+const  {authentication,authorization}= require("../../auth/auth.Utils");
 // Lấy danh sách sản phẩm
 router.get('/products', productController.getAllProducts);
 

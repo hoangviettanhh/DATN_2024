@@ -42,6 +42,14 @@ class AccessController {
         }).send((res))
 
     }
+
+    admin = async (req, res, next) => {
+        // console.log(`[P]::logout::`, req.keyStore);
+        new SuccessResponse({
+            message: "Logout success!",
+            metadata: await AccessService.logout(req.keyStore.id)
+        }).send((res))
+    }
 }
 
 module.exports = new AccessController()

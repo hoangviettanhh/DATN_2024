@@ -153,3 +153,12 @@ exports.deleteProduct = (req, res) => {
         res.status(200).json({message: 'Product deleted successfully'});
     });
 };
+
+
+exports.Admin = (req, res) => {
+    res.json({
+        message: 'Accept access',
+        status: 200
+    });
+    ;
+};
