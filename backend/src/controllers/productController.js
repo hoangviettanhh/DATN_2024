@@ -160,5 +160,4 @@ exports.Admin = (req, res) => {
         message: 'Accept access',
         status: 200
     });
-    ;
 };

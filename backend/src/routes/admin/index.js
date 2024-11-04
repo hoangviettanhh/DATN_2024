@@ -9,7 +9,7 @@ const router = express.Router()
 const productController = require('../../controllers/productController');
 
 
-router.post('/admin',authorization('[Admin]'), asyncHandler(productController.Admin))
+router.post('/admin',authorization('[user]'), asyncHandler(productController.Admin))
 
 
 
